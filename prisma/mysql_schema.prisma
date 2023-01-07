@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL_MYSQL")
+}
+
+model Address {
+  id         Int          @id @default(autoincrement())
+  city       String       @db.VarChar(50)
+  state      String       @db.VarChar(50)
+  country    String       @db.VarChar(50)
+  street     String       @db.VarChar(150)
+  zipCode    String       @db.VarChar(25)
+  userID     Int?
+  Users      Users?       @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Legal_Info Legal_Info[]
+}
+
+model Contacts {
+  id         Int              @id @default(autoincrement())
+  phone      String?          @db.VarChar(25)    @unique
+  instagram  String?          @unique
+  facebook   String?          @unique
+  whatsapp   String?          @db.VarChar(25)    @unique
+  userID     Int
+  contactID  Int?
+  addressID  Int
+  Profile    Profile?         @relation(fields: [contactID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Users      Users            @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Legal_Info Legal_Info[]
+}
+
+model Legal_Info {
+  id             Int          @id @default(autoincrement())
+  fullName       String       @db.VarChar(150)
+  birthDate      String       @db.VarChar(10)
+  CPF            String       @db.VarChar(14)    @unique
+  CRG            String       @db.VarChar(14)    @unique
+  userID         Int          @unique
+  contactID      Int?
+  addressID      Int
+  Address        Address      @relation(fields: [addressID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Contacts       Contacts?    @relation(fields: [contactID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Users          Users        @relation(fields: [userID], references: [id])
+  
+}
+
+model Profile {
+  id        Int            @id @default(autoincrement())
+  firstName String         @db.VarChar(50)
+  lastName  String         @db.VarChar(50)
+  optName   String?        @db.VarChar(50)
+  gender    String?        @db.VarChar(10)
+  bio       String?        @db.VarChar(4096)
+  userID    Int            @unique
+  Contacts  Contacts[]
+  Users     Users          @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model Users {
+  id             Int            @id @default(autoincrement())
+  userName       String         @db.VarChar(50)
+  email          String         @db.VarChar(50)
+  password       String         @db.VarChar(255)
+  legalInfoID    Int?           @unique
+  Address        Address[]
+  Contacts       Contacts[]
+  Legal_Info     Legal_Info?
+  Profile        Profile?
+}
