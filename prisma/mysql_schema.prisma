@@ -67,6 +67,7 @@ model Users {
   password       String         @db.VarChar(255)
   legalInfoID    Int?           @unique
   Address        Address[]
+  Authentication Authentication[]
   Contacts       Contacts[]
   Legal_Info     Legal_Info?
   Profile        Profile?
