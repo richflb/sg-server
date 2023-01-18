@@ -2,7 +2,7 @@ const express = require("express");
 const routes = require("./routes");
 const path = require("path");
 const cors = require('cors');
-const corsOptions = require('./config/corsOptions');
+const corsOptions = require('./src/config/corsOptions');
 const cookieParser = require('cookie-parser');
 
 const PORT = process.env.PORT || 5000;

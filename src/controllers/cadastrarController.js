@@ -7,7 +7,7 @@ const prisma = new PrismaClient();
 
 const cadastrar = async (req, res) => {
     console.log(req.body)
-    const { username, password } = req.body;
+    const { username, email, password } = req.body;
     if (!username || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
     // check for duplicate usernames in the db
     // const duplicate = usersDB.users.find(person => person.username === user);
@@ -17,12 +17,13 @@ const cadastrar = async (req, res) => {
         const hashedpassword = await bcrypt.hash(password, 10);
         const newUser = await prisma.users.create({
             data: {
-                username: username,
+                userName: username,
                 email: email,
-                authentication: {
+                password: hashedpassword,
+                Authentication: {
                     create : {
-                        username: username,
-                        password: hashedpassword
+                        password: hashedpassword,
+                        email: email
                     }
                 }
             }

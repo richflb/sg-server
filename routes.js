@@ -8,7 +8,7 @@ const usuarioController = require("./src/controllers/usuarioController");
 
 route.get("/", homeController.home);
 
-route.get("/cadastrar", cadastrarController.cadastrar);
+route.post("/cadastrar", cadastrarController.cadastrar);
 
 route.get("/cadastro-finalizado", cadastrarController.cadastroFinalizado);
 
