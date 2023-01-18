@@ -62,8 +62,8 @@ model Profile {
 
 model Users {
   id             Int            @id @default(autoincrement())
-  userName       String
-  email          String
+  userName       String		@unique
+  email          String		@unique
   password       String
   legalInfoID    Int?            @unique
   Address        Address[]
@@ -75,8 +75,8 @@ model Users {
 
 model Authentication {
   id             Int            @id @default(autoincrement())
-  userID         Int
-  email          String
+  userID         Int         
+  email          String         @unique
   password       String
   refreshToken   String?
   Users          Users          @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
