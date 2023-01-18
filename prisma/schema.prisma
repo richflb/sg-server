@@ -71,3 +71,12 @@ model Users {
   Legal_Info     Legal_Info?
   Profile        Profile?
 }
+
+model Authentication {
+  id             Int            @id @default(autoincrement())
+  userID         Int
+  email          String
+  password       String
+  refreshToken   String?
+  Users          Users          @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
