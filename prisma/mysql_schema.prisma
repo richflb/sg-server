@@ -65,9 +65,9 @@ model Users {
   email          String           @db.VarChar(50)
   password       String           @db.VarChar(255)
   legalInfoID    Int?             @unique
-  Address        Address?
+  Address        Address[]
   Authentication Authentication[]
-  Contacts       Contacts?
+  Contacts       Contacts[]
   Legal_Info     Legal_Info?
   Profile        Profile?
 }
@@ -75,7 +75,7 @@ model Users {
 model Authentication {
   id           Int     @id @default(autoincrement())
   userID       Int
-  email        String  @db.VarChar(150)
+  email        String  @unique @db.VarChar(150)
   password     String  @db.VarChar(255)
   refreshToken String?
   Users        Users   @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
