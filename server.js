@@ -8,8 +8,10 @@ const verifyJWT = require('./src/middleware/verifyJWT');
 
 const publicRoutes = require("./src/routes/publicRoutes");
 const privateRoutes = require("./src/routes/privateRoutes");
+const account = require("./src/routes/account");
+const profile = require("./src/routes/profile");
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3500;
 const app = express();
 
 //app.use(credentials);
@@ -27,8 +29,10 @@ app.use(express.static(path.resolve(__dirname, "public")));
 app.set("views", path.resolve(__dirname, "src", "views"));
 app.set("view engine", "ejs");
 
-app.use(verifyJWT);
+//app.use(verifyJWT);
 app.use(privateRoutes);
+app.use(account);
+app.use(profile);
 
 
 app.listen(PORT, () => {

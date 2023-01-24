@@ -52,7 +52,7 @@ model Profile {
   id        Int            @id @default(autoincrement())
   firstName String
   lastName  String
-  optName   Unsupported("varchar(50)")?
+  optName   String?
   gender    String?
   bio       String?
   userID    Int            @unique
