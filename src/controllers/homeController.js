@@ -1,3 +1,3 @@
 exports.home = (request, response) => {
-  response.render("home");
+  response.status(200).send("home");
 };
