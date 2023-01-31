@@ -10,6 +10,7 @@ const publicRoutes = require("./src/routes/publicRoutes");
 const privateRoutes = require("./src/routes/privateRoutes");
 const account = require("./src/routes/account");
 const profile = require("./src/routes/profile");
+const upload = require("./src/routes/upload")
 
 const PORT = process.env.PORT || 3500;
 const app = express();
@@ -34,6 +35,7 @@ app.set("view engine", "ejs");
 app.use(privateRoutes);
 app.use(account);
 app.use(profile);
+app.use(upload);
 
 
 app.listen(PORT, () => {
