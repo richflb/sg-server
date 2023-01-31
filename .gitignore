@@ -5,3 +5,7 @@ node_modules
 *.sql
 *-lock*
 migrations/
+
+# production
+build/
+upload*/
