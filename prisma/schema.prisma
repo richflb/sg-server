@@ -31,7 +31,6 @@ model Contacts {
   skype      String?      @unique @db.VarChar(25)
   userID     String          @unique
   profileID  Int?
-  addressID  Int
   Profile    Profile?     @relation(fields: [profileID], references: [id], onDelete: NoAction, onUpdate: NoAction)
   Users      Users        @relation(fields: [userID], references: [id], onDelete: NoAction, onUpdate: NoAction)
   Legal_Info Legal_Info[]

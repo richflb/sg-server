@@ -1,31 +1,17 @@
 const path = require("path");
 
-// Outra versão
-// const fileUpload = (request, response) => {
-//     if(!request.files){
-//         return response.status(400).send("No file Sent!")
-//     }
-//     let img = request.files.image
-//     let name = request.files.image.name
-//     let ext = request.files.image.mimeetype.split('/')[1]
-
-//     img.mv(`src/media/uploads/profile-pic/${name}.${ext}`)
-//     return response.status(201).send("Image Received!")
-// }
 const UPLOAD_FOLDER = "../../public/uploads";
 
 const fileSaveOnServer = (request, response) => {
-    if(!request.files){ // já tem o middleware pra fazer esta verificação.
-        return response.status(400).send("No file Sent!")
+    if(!request.files && !request.body.uid){
+        return response.status(400).send("No file Sent! or uid is missing")
     }
-    console.log("ON fileSaveOnServer: file received")
-
+    let folder = resquest.profile_pic || resquest.capa_pic
     const {files} = request.files
-    let stts;
+    let fname = request.body.uid
 
     Object.keys(files).forEach((key, i) => {
-        console.log(">>>>>>key: ", key, ">>> i", i)
-        const filepath = path.join(__dirname, UPLOAD_FOLDER, files[i].name)
+        const filepath = path.join(__dirname, UPLOAD_FOLDER, folder, fname)
         console.log(filepath)
         stts = files[key].mv(filepath, (err) => {
             if(err){
@@ -43,4 +29,5 @@ const fileSaveOnServer = (request, response) => {
         files: Object.keys(files).map((item, key) => [item, files[key].name])
     })
 }
+
 module.exports =  { fileSaveOnServer };
