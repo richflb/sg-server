@@ -16,9 +16,10 @@ console.log(req.body)
         }
     });
     console.log(">>> User", user)
-    if (!user) return res.sendStatus(401); //Unauthorized 
-    // evaluate password 
+    if (!user) return res.sendStatus(401); 
+
     const match = await bcrypt.compare(password, user.password);
+    
     if (match) {
         // create JWTs
         const accessToken = jwt.sign(
@@ -31,12 +32,12 @@ console.log(req.body)
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
-        // Saving refreshToken with current user
+        
         const auth = await prisma.authentication.update({
             where: {email},
             data: {refreshToken}
         });
-console.log(">>> Auth: ",auth)
+        console.log(">>> Auth no Login request: ", auth)
 
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
         res.json({ accessToken });
