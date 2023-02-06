@@ -1,14 +1,18 @@
 // To verify eighter not image was passed or it was missed. 
 const isImageMissing = (request, response, next) => {
     if(!request.files) {
-        console.log("IN imgExists:", request)
-        console.log("IN imgExists:", request.body)
+        console.log("IN imgExists:", request.files)
         return response.status(400).json(
             {status: "error", message: "IN imgExists: Missing files"}
         )
     }
-    const {files} = request.files 
-    console.log("IN imgExists, (request.files):", files, ">>>> Length:", files.length)
+
+	if(!request.files.length){
+		request.files = [request.files.files]
+	}
+	const files = request.files
+    
+    console.log("IN imgExists, (files):", files, ">>>> Length:")
     next()
 }
 
@@ -41,11 +45,11 @@ const path = require("path");
 
 const parseImageExt = (extAllowed) => {
     function parseExt(req, res, next){
-        let {files} = req.files;
+        let files = req.files;
         let fileExtensions = [];
 
         Object.keys(files).forEach(key => {
-            fileExtensions.push(path.extname(files[key].name))
+            fileExtensions.push(path.extname(files[key].name).toLowerCase())
         });
 
         //as extensões do arquivos são permitidas?
