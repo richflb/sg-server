@@ -1,19 +1,24 @@
+const { PrismaClient } = require("@prisma/client");
 const path = require("path");
 
-const UPLOAD_FOLDER = "../../public/uploads";
+const UPLOAD_FOLDER = "../../public/pics/custom";
 
-const fileSaveOnServer = (request, response) => {
-    if(!request.files && !request.body.uid){
+const prisma = new PrismaClient()
+
+const fileSaveOnServer = async (request, response) => {
+console.log(">>>>>>>>>>>>>", request.files)
+    if(!request.files || !request.body.uid){
         return response.status(400).send("No file Sent! or uid is missing")
     }
-    let folder = resquest.profile_pic || resquest.capa_pic
-    const {files} = request.files
+    let folder = request.body.profile_pic || request.body.capa_pic
+    const  {files} = request
     let fname = request.body.uid
 
-    Object.keys(files).forEach((key, i) => {
-        const filepath = path.join(__dirname, UPLOAD_FOLDER, folder, fname)
+	let filepath
+    Object.keys(files).forEach((key) => {
+        filepath = path.join(__dirname, UPLOAD_FOLDER, folder, fname)
         console.log(filepath)
-        stts = files[key].mv(filepath, (err) => {
+        files[key].mv(filepath, (err) => {
             if(err){
                 return response.status(500).json({
                     status: "error",
@@ -23,10 +28,37 @@ const fileSaveOnServer = (request, response) => {
         })
     });
     
+    // To SAVE path on DB
+    const pathLink = `/pics/custom/${folder}/${fname}`
+    let resU
+    if(request.body.profile_pic){
+        resU = prisma.profile.update({
+            where: {
+                userID: request.body.uid
+            },
+            data: {
+                profilePicFolder: request.body.profile_pic
+            }
+        })
+    } else {
+        resU = prisma.profile.update({
+            where: {
+                userID: request.body.uid
+            },
+            data: {
+                capaPicFolder: request.body.capa_pic
+            }
+        })
+    }
+
     return response.status(201).json({
         status: "success",
         message: `${Object.keys(files).length} File(s) was uploaded with succes..`,
-        files: Object.keys(files).map((item, key) => [item, files[key].name])
+        files: Object.keys(files).map((item, key) => {
+			return {c:item, fname:files[key].name}
+        }),
+        pathLink,
+        resU
     })
 }
 
