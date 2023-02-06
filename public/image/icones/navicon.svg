@@ -1,0 +1,6 @@
+<svg viewBox="0 0 228 228" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <defs></defs>
+  <path d="M 169.621 5.791 L 219.621 5.791 L 219.621 55.791" style="fill: rgba(255, 255, 255, 0); stroke-width: 6px; stroke: rgb(253, 253, 253);" bx:origin="0.542 0.457"></path>
+  <path style="fill: rgba(255, 255, 255, 0); stroke-width: 6px; stroke: rgb(253, 253, 253);" d="M 208.378 72.247 L 208.378 182.209 C 208.378 204.3 190.469 222.209 168.378 222.209 L 48.378 222.209 C 26.287 222.209 8.378 204.3 8.378 182.209 L 8.378 62.209 C 8.378 40.118 26.287 22.209 48.378 22.209 L 146.278 22.247"></path>
+  <path style="fill: rgb(216, 216, 216); stroke-width: 6px; stroke: rgb(253, 253, 253);" d="M 205.362 21.681 L 99.362 126.681"></path>
+</svg>

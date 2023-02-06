@@ -67,6 +67,7 @@ model Profile {
 
 model Posts {
   id          Int       @id @default(autoincrement())
+  title       String     @db.VarChar(30)
   imageURL    String    @db.VarChar(255)
   legend      String?   @db.VarChar(2048)
   profileID   Int
