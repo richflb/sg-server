@@ -25,11 +25,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use(publicRoutes);
-helpTextRoutes(app);
-searchGuides(app);
-searchTours(app);
-publicContacts(app);
+
 
 app.use(cookieParser());
 
@@ -38,6 +34,12 @@ console.log(path.resolve(__dirname, "public"))
 
 app.set("views", path.resolve(__dirname, "src", "views"));
 app.set("view engine", "ejs");
+
+app.use(publicRoutes);
+helpTextRoutes(app);
+searchGuides(app);
+searchTours(app);
+publicContacts(app);
 
 app.use(verifyJWT);
 app.use(privateRoutes);
