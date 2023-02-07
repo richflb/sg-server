@@ -5,7 +5,7 @@ const verifyJWT = (req, res, next) => {
 
     const authHeader = req.headers['authorization'];
     if (!authHeader) {
-console.log("401 REQQQQQ >>>>>")
+console.log("401 REQQQQQ verifyJWT.js>>>>>")
 		return res.sendStatus(401);}
      // Bearer token
     const token = authHeader.split(' ')[1];
@@ -16,7 +16,7 @@ console.log("401 REQQQQQ >>>>>")
             if (err) return res.sendStatus(403); //invalid token
             req.user = decoded.email;
 		req.token = token;
-console.log(">>>> verify middleware >>>>>> User", req.user)
+        console.log(">>>> verify middleware >>>>>> User", req.user)
             next();
         }
     );

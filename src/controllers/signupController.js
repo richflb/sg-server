@@ -1,9 +1,10 @@
 const bcrypt = require('bcrypt');
 const { PrismaClient } = require('@prisma/client');
+const { saveGuides } = require('../utils/publicStore');
 
 const prisma = new PrismaClient();
-const DEFAULT_PROFILE_PIC = "../../public/uploads/profile_pic_default.gif";
-const DEFAULT_CAPA_PIC = "../../public/uploads/capa_pic_default.png";
+const DEFAULT_PROFILE_PIC = "/pics/default/profile_pic_default.gif";
+const DEFAULT_CAPA_PIC = "/pics/default/capa_pic_default.png";
 
 const signUp = async (req, res) => {
 console.log(req)
@@ -34,7 +35,25 @@ console.log(req)
             }
         });
 
-        console.log(newUser);
+
+        const profile = await prisma.profile.findUnique({
+            where: {
+                userID: newUser.id
+            }
+        });
+
+        
+        const { firstName, lastName, userID, profilePicFolder, capaPicFolder} = profile
+        dataProfile = {
+            uid: userID,
+            fullname: `${firstName} ${lastName}`,
+            firstName,
+            lastName,
+            profilePicFolder,
+            capaPicFolder
+        }
+        console.log(newUser, "And Profile:", dataProfile);
+        await saveGuides(dataProfile)
         res.status(201).json({ 'success': `New user ${username} created!` });
         
     } catch (err) {

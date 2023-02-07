@@ -32,21 +32,23 @@ console.log(">>>>>>>>>>>>>", request.files)
     const pathLink = `/pics/custom/${folder}/${fname}`
     let resU
     if(request.body.profile_pic){
-        resU = prisma.profile.update({
+console.log("ENTROU no PROFIL_PIC>>>>>>")
+        resU = await prisma.profile.update({
             where: {
                 userID: request.body.uid
             },
             data: {
-                profilePicFolder: request.body.profile_pic
+                profilePicFolder: pathLink
             }
         })
     } else {
-        resU = prisma.profile.update({
+console.log("ENTROU no PROFIL_PIC>>>>>>")
+        resU = await prisma.profile.update({
             where: {
                 userID: request.body.uid
             },
             data: {
-                capaPicFolder: request.body.capa_pic
+                capaPicFolder: pathLink
             }
         })
     }

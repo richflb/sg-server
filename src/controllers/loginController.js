@@ -13,6 +13,9 @@ console.log(req.body)
     const user = await prisma.users.findUnique({
         where: {
             email: email
+        },
+        include: {
+            Profile: true
         }
     });
     console.log(">>> User", user)
@@ -40,7 +43,7 @@ console.log(req.body)
         console.log(">>> Auth no Login request: ", auth)
 
         res.cookie('jwt', refreshToken, { httpOnly: true, sameSite: 'None', secure: true, maxAge: 24 * 60 * 60 * 1000 });
-        res.json({ accessToken });
+        res.json({ accessToken, ...user.Profile });
     } else {
         res.sendStatus(401);
     }

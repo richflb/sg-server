@@ -1,0 +1,36 @@
+[
+    {
+        "id": "home",
+        "title": "Ajuda com o portal SEUGUIA",
+        "body":[
+            {"p1": "O maior portal que te guiará pelo Mundo afora."}
+        ]
+    },
+    {
+        "id": "tourguide",
+        "title": "Saiba mais TourGuide",
+        "body":[
+            {"p1": "Olá Futuro SeuGUIA TourGuide! Que bom que você está aqui. Seja bem vindo"},
+            {"p2": "Que bom que você está aqui. Será o maior em ajudá-lo a divulgar seus serviços turísticos"},
+            {"p3": "Seja Bem vindo! É um enorme prazer tê-lo junto conosco."}
+        ]
+    },
+    {
+        "id": "tourist",
+        "title": "Saiba Mais Tourist",
+        "body":[
+            {"p1": "Olá Turista! Que bom que você está aqui. Seja bem vindo"},
+            {"p2": "Aqui você ficará por dentro de tudo. Procurando algum companheiro de viagens? Legal em breve estaremos te indicando o acompanhante ideal ."},
+            {"p3": "Acompanhe nossas atualizações!"}
+        ]
+    },
+    {
+        "id": "traveller",
+        "title": "Saiba mais  Travaller",
+        "body":[
+            {"p1": "Olá viajante! Que bom que você está aqui. Seja bem vindo"},
+            {"p2": "Aqui você ficará por dentro de tudo. Procurando algum companheiro de viagens? Legal em breve estaremos te indicando o acompanhante ideal ."},
+            {"p3": "Acompanhe nossas atualizações! "}
+        ]
+    }
+]
