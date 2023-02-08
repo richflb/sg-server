@@ -7,7 +7,7 @@ const imageUploadMiddleware = require("../middleware/files_uplodas/imageUploadMi
 route.post("/upload",
             fileUpload({createParentPath: true}),
             imageUploadMiddleware.isImageMissing,
-            imageUploadMiddleware.parseImageExt([".png", ".jpg", ".jpeg"]),
+            imageUploadMiddleware.parseImageExt([".png", ".jpg", ".jpeg", ".svg"]),
             imageUploadMiddleware.hasFileSizeLimit,
             fileUploadController.fileSaveOnServer
         )
