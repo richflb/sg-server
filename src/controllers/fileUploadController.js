@@ -30,7 +30,7 @@ const fileSaveOnServer = async (request, response) => {
     });
     
     // To SAVE path on DB
-    const pathLink = `/pics/custom/${folder}/${fname}`
+    const pathLink = `/pics/custom/${folder}/${fname}${ext}`
     let resU
     if(request.body.profile_pic){
 console.log("ENTROU no PROFIL_PIC>>>>>>")
