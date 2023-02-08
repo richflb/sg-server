@@ -6,7 +6,7 @@ const UPLOAD_FOLDER = "../../public/pics/custom";
 const prisma = new PrismaClient()
 
 const fileSaveOnServer = async (request, response) => {
-console.log(">>>>>>>>>>>>>", request.files)
+//console.log(">>>>>>>>>>>>>", request.files)
     if(!request.files || !request.body.uid){
         return response.status(400).send("No file Sent! or uid is missing")
     }
@@ -16,7 +16,8 @@ console.log(">>>>>>>>>>>>>", request.files)
 
 	let filepath
     Object.keys(files).forEach((key) => {
-        filepath = path.join(__dirname, UPLOAD_FOLDER, folder, fname)
+        let ext = path.extname(files[key].name).toLowerCase();
+        filepath = path.join(__dirname, UPLOAD_FOLDER, folder, `${fname}${ext}`)
         console.log(filepath)
         files[key].mv(filepath, (err) => {
             if(err){
