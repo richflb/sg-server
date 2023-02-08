@@ -14,9 +14,10 @@ const fileSaveOnServer = async (request, response) => {
     const  {files} = request
     let fname = request.body.uid
 
-	let filepath
+	let filepath;
+	let ext;
     Object.keys(files).forEach((key) => {
-        let ext = path.extname(files[key].name).toLowerCase();
+        ext = path.extname(files[key].name).toLowerCase();
         filepath = path.join(__dirname, UPLOAD_FOLDER, folder, `${fname}${ext}`)
         console.log(filepath)
         files[key].mv(filepath, (err) => {
