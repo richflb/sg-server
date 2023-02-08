@@ -25,7 +25,7 @@ exports.verifyToken = async (req, res) => {
                 uid: id,
                 username: userName,
                 authToken,
-                Profile
+                ...Profile
             });
         }
     
