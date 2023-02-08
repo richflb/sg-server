@@ -14,7 +14,7 @@ function publicContacts(app){
             return response.status(400).json({status: "error", message: "User id is required"});
         }
 
-        const resPrisama = await prisma.users.findUnique({
+        const resPrisma = await prisma.users.findUnique({
             where: {id: uid},
             include: {
                 Contacts: true,
