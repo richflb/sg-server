@@ -1,10 +1,10 @@
 const express = require("express");
 const path = require("path");
 const cors = require('cors');
-//const corsOptions = require('./src/config/corsOptions');
+const corsOptions = require('./src/config/corsOptions');
 const cookieParser = require('cookie-parser');
 const verifyJWT = require('./src/middleware/verifyJWT');
-//const credentials = require('./src/middleware/credentials');
+const credentials = require('./src/middleware/credentials');
 
 const publicRoutes = require("./src/routes/publicRoutes");
 const privateRoutes = require("./src/routes/privateRoutes");
