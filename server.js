@@ -13,7 +13,7 @@ const profile = require("./src/routes/profile");
 const upload = require("./src/routes/upload");
 const contactsRoutes = require("./src/routes/contactsRoutes");
 const helpTextRoutes = require("./src/controllers/helpTextController");
-const { searchTours, searchGuides } = require("./src/routes/searchRoutes");
+const { getAllGuides, searchTours, searchGuides } = require("./src/routes/searchRoutes");
 const publicContacts = require("./src/routes/publicContactRoutes");
 const PORT = process.env.PORT || 3500;
 const app = express();
@@ -37,6 +37,7 @@ app.use(publicRoutes);
 helpTextRoutes(app);
 searchGuides(app);
 searchTours(app);
+getAllGuides(app);
 publicContacts(app);
 
 app.use(verifyJWT);

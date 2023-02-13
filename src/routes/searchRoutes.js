@@ -92,8 +92,16 @@ const searchTours = (app) => {
     })
 }
 
-
+const getAllGuides = (app) => {
+    app.route("/get-all-guides")
+    .get(async (request, response) => {
+        const data = getSearch("Guides")
+        if(data.length == 0) return response.status(404).json({"error": "not found"})
+        response.status(200).json(data) // 'data' is an objets's array 
+    })
+}
 module.exports = {
     searchGuides,
-    searchTours
+    searchTours,
+    getAllGuides
 };
