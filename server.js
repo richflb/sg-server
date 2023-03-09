@@ -18,9 +18,9 @@ const publicContacts = require("./src/routes/publicContactRoutes");
 const PORT = process.env.PORT || 3500;
 const app = express();
 
-app.use(credentials);
+//app.use(credentials);
 
-app.use(cors(corsOptions));
+//app.use(cors(corsOptions));
 app.use(cors());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
