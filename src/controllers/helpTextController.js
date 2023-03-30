@@ -10,7 +10,7 @@ const getHelpText = () => {
         :[];
     
     try{
-console.log("IN getHelpText:", JSON.stringify({data}))
+        console.log("IN getHelpText:", JSON.stringify({data}))
         return JSON.parse(data)
     } catch (err){
         return []
