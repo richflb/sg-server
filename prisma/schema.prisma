@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgres" //"mysql"
   url      = env("DATABASE_URL")
 }
 
@@ -66,12 +66,37 @@ model Profile {
 }
 
 model Posts {
-  id          Int       @id @default(autoincrement())
-  title       String     @db.VarChar(30)
-  imageURL    String    @db.VarChar(255)
-  legend      String?   @db.VarChar(2048)
+  id          Int         @id @default(autoincrement())
+  title       String      @db.VarChar(30)
+  imageURL    String?     @db.VarChar(255)
+  legend      String?     @db.VarChar(2048)
   profileID   Int
-  Profile     Profile   @relation(fields: [profileID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  localId     String
+  Profile     Profile     @relation(fields: [profileID], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  LocalTour   LocalTours? @relation(fields: [localId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  Points      Points[]
+}
+
+model LocalTours {
+  id      String @id @default(cuid())
+  country String @db.VarChar(120)
+  state   String @db.VarChar(120)
+  city    String @db.VarChar(100)
+  Posts   Posts[]
+  Points  Points[]
+  
+}
+
+// Points = meeting point
+model Points {
+  id            Int      @id @default(autoincrement())
+  address       String   @db.VarChar(120)
+  referralPoint String   @db.VarChar(100)
+  localId       String
+  postId        Int?
+  Posts         Posts?   @relation(fields: [postId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  LocalTours LocalTours  @relation(fields: [localId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+
 
 }
 
