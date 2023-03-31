@@ -7,7 +7,7 @@ exports.getAllTours = async (req, res) => {
     const posts = await prisma.profile.findMany({
         include: {
             Posts: {
-                include: {Points: true, LocalTour: true, U}
+                include: {Points: true, LocalTour: true}
             } //true,
             
         }
