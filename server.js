@@ -15,6 +15,7 @@ const contactsRoutes = require("./src/routes/contactsRoutes");
 const helpTextRoutes = require("./src/controllers/helpTextController");
 const { getAllGuides, searchTours, searchGuides } = require("./src/routes/searchRoutes");
 const publicContacts = require("./src/routes/publicContactRoutes");
+const { manageTourRoute } = require("./src/routes/manageToursRoutes");
 const PORT = process.env.PORT || 3500;
 const app = express();
 
@@ -39,6 +40,7 @@ searchGuides(app);
 searchTours(app);
 getAllGuides(app);
 publicContacts(app);
+manageTourRoute(app);
 
 app.use(verifyJWT);
 app.use(privateRoutes);

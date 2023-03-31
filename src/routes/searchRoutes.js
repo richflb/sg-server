@@ -1,7 +1,6 @@
+const { PrismaClient } = require("@prisma/client");
 const fs = require("fs")
 const { join } = require("path")
-
-
 
 const getSearch = (tipo) => {
     const filePath = join(__dirname, "../../data/search", `search${tipo}DB.json`)
@@ -15,11 +14,6 @@ const getSearch = (tipo) => {
         return []
     }
 }
-
-const saveUser = (userData) => {
-    fs.writeFileSync(filePath, JSON.stringify(userData, null, "\t"))
-}
-
 
 /* Express route*/
 const searchGuides = (app) => {
@@ -60,34 +54,21 @@ const searchGuides = (app) => {
     })
 }
 
+const prisma = new PrismaClient();
 
 const searchTours = (app) => {
-    app.route("/search/tours/:keywords?")
+    app.route("/tours")
     .get(async (request, response) => {
-        const keywords = request.params.keywords;
-        if(!keywords){
-            return response.status(404).json(
-                {
-                    status: "Not Found", 
-                    message: "You must pass an name!"
-                });
-        }
-
-        // const result = await prisma.posts.findMany({
-        //     where: {
-        //         legend: {
-        //             legend: {
-        //                 OR: [
-        //                     {
-        //                         startsWith: request.keywords
-        //                     }
-        //                 ]
-        //             }
-        //         }
-        //     }
-        // })
-
-        response.status(200).json({Request: request.params})
+        console.log("Search Tours >>> searchRoutes.js")
+        const posts = await prisma.profile.findMany({
+            include: {
+                Posts: {
+                    include: {Points: true, LocalTour: true}
+                } //true,
+                
+            }
+        })
+        response.status(200).json({message: "success", data: posts})
         
     })
 }
