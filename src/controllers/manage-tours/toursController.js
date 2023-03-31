@@ -24,7 +24,7 @@ exports.getToursByProfileID = async (req, res) => {
         where: {id: parseInt(id)},
         include: {
             Posts: {
-                include: {Points: true, LocalTour: true, U}
+                include: {Points: true, LocalTour: true}
             } //true,
             
         }
