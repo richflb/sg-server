@@ -42,9 +42,10 @@ const signUp = async (req, res) => {
         });
 
         
-        const { firstName, lastName, userID, profilePicFolder, capaPicFolder} = profile
+        const { id, firstName, lastName, userID, profilePicFolder, capaPicFolder} = profile
         dataProfile = {
             uid: userID,
+            pid: id,
             fullname: `${firstName} ${lastName}`,
             firstName,
             lastName,
