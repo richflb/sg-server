@@ -5,8 +5,8 @@ const { join } = require("path")
 const saveUser = async (userData, tipo) => {
     const filePath = join(__dirname, "../../data/search", `search${tipo}DB.json`)
     fs.writeFileSync(filePath, JSON.stringify(userData, null, "\t"))
-    console.log("Public Sotre: ", filePath)
-    console.log("Data Saved: ", userData)
+    console.log(">>>> Public Sotre: ", filePath)
+    console.log(">>>> Data Saved: ", userData)
 }
 
 const getSearch = (tipo) => {

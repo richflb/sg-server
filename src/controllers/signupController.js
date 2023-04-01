@@ -7,7 +7,6 @@ const DEFAULT_PROFILE_PIC = "/pics/default/profile_pic_default.gif";
 const DEFAULT_CAPA_PIC = "/pics/default/capa_pic_default.png";
 
 const signUp = async (req, res) => {
-console.log(req)
     const { username, email, password } = req.body;
     if (!username || !password) return res.status(400).json({ 'message': 'Username and password are required.' });
 
